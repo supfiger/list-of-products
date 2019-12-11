@@ -98,7 +98,7 @@ export default class ProductPage extends Component {
           </button>
         </div>
         <ul className="reviewsGroupList">
-          {myReviewList > 0 &&
+          {myReviewList.length > 0 &&
             myReviewList
               .reverse()
               .map(item => <Review key={item.id} reviewItem={item} />)}

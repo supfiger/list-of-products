@@ -66,17 +66,17 @@ export default class ReviewModal extends Component {
       state: { rate, text }
     } = this;
 
-    // if (!this.props.isAuth) {
-    //   return (
-    //     <ModalComponent
-    //       show={show}
-    //       onClose={onClose}
-    //       className="reviewModalMessage"
-    //     >
-    //       <h4>Войдите, чтобы написать отзыв.</h4>
-    //     </ModalComponent>
-    //   );
-    // }
+    if (!this.props.isAuth) {
+      return (
+        <ModalComponent
+          show={show}
+          onClose={onClose}
+          className="reviewModalMessage"
+        >
+          <h4>Войдите, чтобы написать отзыв.</h4>
+        </ModalComponent>
+      );
+    }
 
     return (
       <ModalComponent show={show} onClose={onClose} className="reviewModalWrap">
