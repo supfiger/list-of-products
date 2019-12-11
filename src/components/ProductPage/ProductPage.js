@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 
 import { getReviews } from "../../api.js";
 import { ReviewModal, Review } from "../index";
@@ -9,39 +8,43 @@ export default class ProductPage extends Component {
   constructor(props) {
     super(props);
 
+    const { location } = this.props;
+    this.product = location.state.product;
+
     this.state = {
-      reviewItems: [],
+      reviewList: [],
+      myReviewList: [],
       loading: false,
       error: false,
-      showReviewModal: false,
-      newReviewData: {},
-      isNewReview: false,
-      newVal: 2
+      showReviewModal: false
     };
   }
 
   componentDidMount() {
     this.fetchGetReviews();
+    const getList = JSON.parse(localStorage.getItem("myReviewList")).reverse();
+    console.log("getList", getList);
     this.setState({
-      newReviewData: JSON.parse(localStorage.getItem("myReviews"))
+      myReviewList: getList
     });
   }
 
-  async fetchGetReviews() {
-    const { location } = this.props;
+  componentDidUpdate() {
+    localStorage.setItem(
+      "myReviewList",
+      JSON.stringify(this.state.myReviewList)
+    );
+  }
 
-    const {
-      state: { product }
-    } = location;
-
+  fetchGetReviews = async () => {
     this.setState({
       loading: true
     });
 
     try {
-      const result = await getReviews(product.id);
+      const result = await getReviews(this.product.id);
       this.setState({
-        reviewItems: result
+        reviewList: result
       });
     } catch (error) {
       this.setState({
@@ -52,8 +55,8 @@ export default class ProductPage extends Component {
         loading: false
       });
     }
-    console.log("reviewItems", this.state.reviewItems);
-  }
+    console.log("reviewList", this.state.reviewList);
+  };
 
   toggleReviewModal = () => {
     this.setState(prevState => ({
@@ -62,31 +65,25 @@ export default class ProductPage extends Component {
   };
 
   postReview = (rate, text) => {
-    const { newReviewData } = this.state;
-    let updateReviews = newReviewData;
-    updateReviews = {
+    const newItem = {
       created_by: {
         username: this.props.username
       },
+      id: 1 + Math.random(),
       rate,
       text
     };
+    const list = [...this.state.myReviewList];
+    list.push(newItem);
 
     this.setState({
-      loading: false
+      myReviewList: list
     });
-
-    this.setState({
-      newReviewData: updateReviews,
-      isNewReview: true
-    });
-    localStorage.setItem("myReviews", JSON.stringify(newReviewData));
-    console.log("newReviewData", newReviewData);
     this.toggleReviewModal();
   };
 
   renderReviews = () => {
-    const { reviewItems, newReviewData, isNewReview } = this.state;
+    const { reviewList, myReviewList } = this.state;
 
     return (
       <div className="reviewsWrap">
@@ -101,11 +98,12 @@ export default class ProductPage extends Component {
           </button>
         </div>
         <ul className="reviewsGroupList">
-          {isNewReview && <Review reviewItem={newReviewData} />}
-          {reviewItems.length > 0 ? (
-            reviewItems.map(item => (
-              <Review key={item.id} reviewItem={item} isNewReview={false} />
-            ))
+          {myReviewList > 0 &&
+            myReviewList
+              .reverse()
+              .map(item => <Review key={item.id} reviewItem={item} />)}
+          {reviewList.length > 0 ? (
+            reviewList.map(item => <Review key={item.id} reviewItem={item} />)
           ) : (
             <li className="productMessage">There are no reviews here.</li>
           )}
@@ -115,8 +113,7 @@ export default class ProductPage extends Component {
   };
 
   renderProductInfo = () => {
-    const { location } = this.props;
-    const { product } = location.state;
+    const product = this.product;
 
     return (
       <div className="productTopBlock">
@@ -132,9 +129,10 @@ export default class ProductPage extends Component {
   };
 
   render() {
-    const { showReviewModal } = this.state;
-    const { location, isAuth } = this.props;
-    const { product } = location.state;
+    const {
+      state: { showReviewModal },
+      props: { isAuth }
+    } = this;
 
     return (
       <div className="container">
@@ -144,7 +142,7 @@ export default class ProductPage extends Component {
           show={showReviewModal}
           onClose={this.toggleReviewModal}
           postReview={this.postReview}
-          product={product}
+          product={this.product}
           isAuth={isAuth}
         />
       </div>

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component   } from "react";
 import { Link, withRouter } from "react-router-dom";
 
 import "./Navbar.sass";
@@ -9,7 +9,7 @@ class Navbar extends Component {
     this.props.history.push("/");
   };
 
-  renderNavbar = () => {
+  render() {
     return (
       <nav className="navbar navbar-expand navbar-light">
         <div className="container">
@@ -59,10 +59,6 @@ class Navbar extends Component {
         </div>
       </nav>
     );
-  };
-
-  render() {
-    return <div>{this.renderNavbar()}</div>;
   }
 }
 

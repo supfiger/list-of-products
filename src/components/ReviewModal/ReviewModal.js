@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactStars from "react-stars";
 
-import { postReview } from "../../api.js";
+// import { postReview } from "../../api.js";
 import { ModalComponent } from "../index";
 import "./ReviewModal.sass";
 
@@ -46,7 +46,6 @@ export default class ReviewModal extends Component {
         loading: false
       });
     }
-    console.log("reviewItems", this.state.reviewItems);
   };
 
   onChangeRating = rate => {
