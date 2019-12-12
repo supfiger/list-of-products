@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 import "./ProductListPage.sass";
 import { getProducts } from "../../api.js";
+import { Product } from "../index";
 
 export default class ProductListPage extends Component {
   constructor(props) {
@@ -44,30 +44,12 @@ export default class ProductListPage extends Component {
     const { productItems } = this.state;
 
     return (
-      <div className="productWrap container">
+      <div className="productListWrap container">
         <h2 className="listTitle"> List of products</h2>
         <ul className="productsGroupList">
           {productItems.length > 0 ? (
             productItems.map(item => (
-              <li key={item.id} className="card productItem">
-                <Link
-                  to={{
-                    pathname: `/productlist/${item.id}`,
-                    state: {
-                      product: item
-                    }
-                  }}
-                >
-                  <img
-                    className="card-img-top"
-                    src={`http://smktesting.herokuapp.com/static/${item.img}`}
-                    alt=""
-                  />
-                  <div className="card-body productBody">
-                    <h4 className="card-title">{item.title}</h4>
-                  </div>
-                </Link>
-              </li>
+              <Product key={item.id} productItem={item} />
             ))
           ) : (
             <li className="productMessage">There are no products</li>

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactStars from "react-stars";
+import "./Review.sass";
 
 const Review = props => {
   const { reviewItem } = props;
@@ -16,7 +17,7 @@ const Review = props => {
           edit={false}
           className="reviewRate"
         />
-        <div className="reviewText">{reviewItem.text}</div>
+        <div>{reviewItem.text}</div>
       </div>
     </li>
   );

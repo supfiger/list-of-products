@@ -94,7 +94,7 @@ export default class ReviewModal extends Component {
           <div className="reviewModalItem">
             <label htmlFor="reviewArea">Отзыв</label>
             <textarea
-              className="form-control reviewText"
+              className="form-control reviewModalText"
               rows="5"
               required
               id="reviewArea"

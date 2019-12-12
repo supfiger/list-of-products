@@ -7,3 +7,4 @@ export { default as Navbar } from "./Navbar/Navbar";
 export { default as ModalComponent } from "./ModalComponent/ModalComponent";
 export { default as ReviewModal } from "./ReviewModal/ReviewModal";
 export { default as Review } from "./Review/Review";
+export { default as Product } from "./Product/Product";

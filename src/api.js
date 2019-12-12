@@ -64,15 +64,17 @@ export const getProducts = async () => {
   }
 };
 
-export const getReviews = async id => {
+export const getReviews = async (id, token) => {
   try {
     let response = await fetch(requestURL + `/api/reviews/${id}`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`
       }
     });
     let result = await response.json();
+    console.log("getReviews result", result);
     return result;
   } catch (error) {
     console.error("Ошибка", error);

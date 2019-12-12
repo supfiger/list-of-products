@@ -23,11 +23,12 @@ export default class ProductPage extends Component {
 
   fetchGetReviews = async () => {
     const { product } = this.props.location.state;
+
     this.setState({
       loading: true
     });
     try {
-      const result = await getReviews(product.id);
+      const result = await getReviews(product.id, this.props.token);
       this.setState({
         reviewList: result
       });
@@ -53,7 +54,7 @@ export default class ProductPage extends Component {
     const { product } = this.props.location.state;
 
     try {
-      const result = await getReviews(product.id);
+      const result = await getReviews(product.id, this.props.token);
       this.setState({
         reviewList: result
       });
@@ -70,7 +71,7 @@ export default class ProductPage extends Component {
   };
 
   renderReviews = () => {
-    const { reviewList, myReviewList } = this.state;
+    const { reviewList } = this.state;
 
     return (
       <div className="reviewsWrap">
