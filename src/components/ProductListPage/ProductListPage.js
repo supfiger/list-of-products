@@ -47,7 +47,7 @@ export default class ProductListPage extends Component {
       <div className="productListWrap container">
         <h2 className="listTitle"> List of products</h2>
         <ul className="productsGroupList">
-          {productItems.length > 0 ? (
+          {productItems && productItems.length > 0 ? (
             productItems.map(item => (
               <Product key={item.id} productItem={item} />
             ))
