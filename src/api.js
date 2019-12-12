@@ -32,17 +32,17 @@ export const loginUser = async bodyData => {
   }
 };
 
-export const postReview = async (bodyData, field) => {
+export const postReview = async (bodyData, id, token) => {
   try {
-    let response = await fetch(requestURL + `/api/reviews/${field}`, {
+    let response = await fetch(requestURL + `/api/reviews/${id}`, {
       method: "POST",
       body: JSON.stringify(bodyData),
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`
       }
     });
     let result = await response.json();
-    console.log("postReview", result);
     return result;
   } catch (error) {
     console.error("Ошибка", error);
@@ -64,9 +64,9 @@ export const getProducts = async () => {
   }
 };
 
-export const getReviews = async field => {
+export const getReviews = async id => {
   try {
-    let response = await fetch(requestURL + `/api/reviews/${field}`, {
+    let response = await fetch(requestURL + `/api/reviews/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"

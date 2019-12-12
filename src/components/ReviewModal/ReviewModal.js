@@ -1,17 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import ReactStars from "react-stars";
 
-// import { postReview } from "../../api.js";
+import { postReview } from "../../api.js";
 import { ModalComponent } from "../index";
 import "./ReviewModal.sass";
 
 export default class ReviewModal extends Component {
-  static propTypes = {
-    show: PropTypes.bool,
-    onClose: PropTypes.func
-  };
-
   constructor(props) {
     super(props);
 
@@ -28,10 +22,15 @@ export default class ReviewModal extends Component {
     });
 
     try {
-      // const result = await postReview({ rate, text }, product.id);
       const { rate, text } = this.state;
       if (rate !== 0 && text !== "") {
-        this.props.postReview(rate, text);
+        const result = await postReview(
+          { rate, text },
+          this.props.product.id,
+          this.props.token
+        );
+        console.log("fetchPostReview result", result);
+        this.props.postReview(result);
       }
       this.setState({
         rate: 0,

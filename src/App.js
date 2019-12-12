@@ -17,7 +17,8 @@ class App extends Component {
 
     this.state = {
       isAuth: Boolean(localStorage.getItem("token")),
-      username: localStorage.getItem("username")
+      username: localStorage.getItem("username"),
+      token: localStorage.getItem("token")
     };
   }
 
@@ -43,7 +44,7 @@ class App extends Component {
   };
 
   render() {
-    const { isAuth, username } = this.state;
+    const { isAuth, username, token } = this.state;
 
     return (
       <BrowserRouter>
@@ -60,7 +61,12 @@ class App extends Component {
               exact
               path="/productlist/:id"
               render={props => (
-                <ProductPage {...props} isAuth={isAuth} username={username} />
+                <ProductPage
+                  {...props}
+                  isAuth={isAuth}
+                  username={username}
+                  token={token}
+                />
               )}
             />
             <Route
