@@ -1,1 +1,1 @@
-https://supfiger.github.io/list-of-products
+supfiger.github.io/list-of-products
