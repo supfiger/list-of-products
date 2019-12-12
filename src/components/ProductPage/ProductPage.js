@@ -24,9 +24,9 @@ export default class ProductPage extends Component {
     this.fetchGetReviews();
     const getList = JSON.parse(localStorage.getItem("myReviewList")).reverse();
     console.log("getList", getList);
-    this.setState({
-      myReviewList: getList
-    });
+    // this.setState({
+    //   myReviewList: getList
+    // });
   }
 
   componentDidUpdate() {
@@ -80,6 +80,7 @@ export default class ProductPage extends Component {
       myReviewList: list
     });
     this.toggleReviewModal();
+    console.log("postReview", this.state.myReviewList);
   };
 
   renderReviews = () => {
@@ -133,6 +134,7 @@ export default class ProductPage extends Component {
       state: { showReviewModal },
       props: { isAuth }
     } = this;
+    console.log("render", this.state.myReviewList);
 
     return (
       <div className="container">
