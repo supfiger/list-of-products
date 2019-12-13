@@ -64,13 +64,12 @@ export const getProducts = async () => {
   }
 };
 
-export const getReviews = async (id, token) => {
+export const getReviews = async id => {
   try {
     let response = await fetch(requestURL + `/api/reviews/${id}`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`
+        "Content-Type": "application/json"
       }
     });
     let result = await response.json();

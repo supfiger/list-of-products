@@ -28,7 +28,7 @@ export default class ProductPage extends Component {
       loading: true
     });
     try {
-      const result = await getReviews(product.id, this.props.token);
+      const result = await getReviews(product.id);
       this.setState({
         reviewList: result
       });
@@ -54,7 +54,7 @@ export default class ProductPage extends Component {
     const { product } = this.props.location.state;
 
     try {
-      const result = await getReviews(product.id, this.props.token);
+      const result = await getReviews(product.id);
       this.setState({
         reviewList: result
       });

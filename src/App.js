@@ -44,7 +44,7 @@ class App extends Component {
   };
 
   render() {
-    const { isAuth, username, token } = this.state;
+    const { isAuth, username } = this.state;
 
     return (
       <BrowserRouter>
@@ -61,12 +61,7 @@ class App extends Component {
               exact
               path="/productlist/:id"
               render={props => (
-                <ProductPage
-                  {...props}
-                  isAuth={isAuth}
-                  username={username}
-                  token={token}
-                />
+                <ProductPage {...props} isAuth={isAuth} username={username} />
               )}
             />
             <Route
