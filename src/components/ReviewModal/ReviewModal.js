@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactStars from "react-stars";
+import { Link } from "react-router-dom";
 
 import { postReview } from "../../api.js";
 import { ModalComponent } from "../index";
@@ -12,37 +13,34 @@ export default class ReviewModal extends Component {
     this.state = {
       rate: 0,
       text: "",
-      loading: false
+      error: false,
+      rateError: "",
+      textError: ""
     };
   }
 
   fetchPostReview = async () => {
-    this.setState({
-      loading: true
-    });
-
     try {
       const { rate, text } = this.state;
-      if (rate !== 0 && text !== "") {
+      const isValid = this.validate();
+
+      if (isValid) {
         const result = await postReview(
           { rate, text },
           this.props.product.id,
           this.props.token
         );
-        console.log("fetchPostReview result", result);
         this.props.postReview(result);
+        this.setState({
+          rate: 0,
+          text: "",
+          rateError: "",
+          textError: ""
+        });
       }
-      this.setState({
-        rate: 0,
-        text: ""
-      });
     } catch (error) {
       this.setState({
         error: error
-      });
-    } finally {
-      this.setState({
-        loading: false
       });
     }
   };
@@ -54,15 +52,41 @@ export default class ReviewModal extends Component {
   };
 
   onChangeText = e => {
+    let val = e.target.value;
+    val.trim();
+
     this.setState({
-      text: e.target.value
+      text: val
     });
+  };
+
+  validate = () => {
+    const { rate, text } = this.state;
+    let rateError = "";
+    let textError = "";
+
+    if (rate == 0) {
+      rateError = "Вы должны поставить рейтинг";
+    }
+    if (!text || /^\s+$/.test(text)) {
+      textError = "Вы должны заполнить это поле";
+    }
+
+    if (rateError || textError) {
+      this.setState({
+        rateError,
+        textError
+      });
+      return false;
+    }
+
+    return true;
   };
 
   render() {
     const {
       props: { show, onClose },
-      state: { rate, text }
+      state: { rate, text, error, rateError, textError }
     } = this;
 
     if (!this.props.isAuth) {
@@ -73,6 +97,9 @@ export default class ReviewModal extends Component {
           className="reviewModalMessage"
         >
           <h4>Войдите, чтобы написать отзыв.</h4>
+          <Link className="btn btn-primary modalButton" to="/login">
+            Вход
+          </Link>
         </ModalComponent>
       );
     }
@@ -80,39 +107,42 @@ export default class ReviewModal extends Component {
     return (
       <ModalComponent show={show} onClose={onClose} className="reviewModalWrap">
         <h4 className="reviewModalTitle">Написать отзыв</h4>
-        <ReactStars
-          value={rate}
-          count={5}
-          size={60}
-          color2={"#ff8d00"}
-          edit={true}
-          className="setReviewRating"
-          half={false}
-          onChange={this.onChangeRating}
-        />
-        <div className="form-group reviewBlock">
-          <div className="reviewModalItem">
-            <label htmlFor="reviewArea">Отзыв</label>
-            <textarea
-              className="form-control reviewModalText"
-              rows="5"
-              required
-              id="reviewArea"
-              maxLength="100"
-              value={text}
-              onChange={this.onChangeText}
-            ></textarea>
-          </div>
+        <div className="rateBlock">
+          <ReactStars
+            value={rate}
+            count={5}
+            size={60}
+            color2={"#ff8d00"}
+            edit={true}
+            className="setReviewRating"
+            half={false}
+            onChange={this.onChangeRating}
+          />
+          {rateError && <div className="warningMessage">{rateError}</div>}
+        </div>
+        <div className="reviewBlock">
+          <label htmlFor="reviewArea">Отзыв</label>
+          <textarea
+            className="form-control reviewModalText"
+            rows="5"
+            required
+            id="reviewArea"
+            maxLength="90"
+            value={text}
+            onChange={this.onChangeText}
+          ></textarea>
+          {textError && <div className="warningMessage">{textError}</div>}
         </div>
         <div className="reviewBtnWrap">
           <button
-            className="btn btn-primary"
+            className="btn btn-primary modalButton"
             type="button"
             onClick={this.fetchPostReview}
           >
             Оставить отзыв
           </button>
         </div>
+        {error && <div className="errorMessage">{error}</div>}
       </ModalComponent>
     );
   }

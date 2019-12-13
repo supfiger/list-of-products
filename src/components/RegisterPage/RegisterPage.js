@@ -21,7 +21,6 @@ export default class RegisterPage extends Component {
 
     try {
       const result = await registerUser({ username, password });
-      console.log("fetchRegisterUser result", result);
 
       if (result.success) {
         this.props.onLogin(result.token, username);
@@ -35,18 +34,21 @@ export default class RegisterPage extends Component {
         error: error
       });
     }
-    console.log("error", this.state.error);
   };
 
   onChangeUsername = e => {
-    let val = e.target.value.trim();
+    let val = e.target.value;
+    val.trim();
+
     this.setState({
       username: val
     });
   };
 
   onChangePassword = e => {
-    let val = e.target.value.trim();
+    let val = e.target.value;
+    val.trim();
+
     this.setState({
       password: val
     });
@@ -90,7 +92,7 @@ export default class RegisterPage extends Component {
             </div>
             <div className="btnWrap">
               <button
-                className="btnAuth btn btn-primary "
+                className="btnAuth btn btn-success "
                 type="submit"
                 onClick={this.fetchRegisterUser}
               >

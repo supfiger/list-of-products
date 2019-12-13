@@ -10,16 +10,11 @@ export default class ProductListPage extends Component {
 
     this.state = {
       productItems: [],
-      loading: false,
       error: false
     };
   }
 
   async fetchGetProducts() {
-    this.setState({
-      loading: true
-    });
-
     try {
       const result = await getProducts();
       this.setState({
@@ -28,10 +23,6 @@ export default class ProductListPage extends Component {
     } catch (error) {
       this.setState({
         error: error
-      });
-    } finally {
-      this.setState({
-        loading: false
       });
     }
   }

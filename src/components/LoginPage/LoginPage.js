@@ -21,7 +21,7 @@ export default class LoginPage extends Component {
 
     try {
       const result = await loginUser({ username, password });
-      console.log("fetchLoginUser result", result);
+
       if (result.success) {
         this.props.onLogin(result.token, username);
       } else {
@@ -34,19 +34,22 @@ export default class LoginPage extends Component {
         error: error
       });
     }
-
-    console.log("error", this.state.error);
   };
 
   onChangeUsername = e => {
-    let val = e.target.value.trim();
-    this.setState({
-      username: val
-    });
+    let val = e.target.value;
+
+    if (val.match(/^\S+$/)) {
+      this.setState({
+        username: val
+      });
+    }
   };
 
   onChangePassword = e => {
-    let val = e.target.value.trim();
+    let val = e.target.value;
+    val.trim();
+
     this.setState({
       password: val
     });

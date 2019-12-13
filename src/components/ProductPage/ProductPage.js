@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 
 import { getReviews } from "../../api.js";
 import { ReviewModal, Review } from "../index";
@@ -11,7 +12,6 @@ export default class ProductPage extends Component {
     this.state = {
       reviewList: [],
       myReviewList: [],
-      loading: false,
       error: false,
       showReviewModal: false
     };
@@ -22,11 +22,12 @@ export default class ProductPage extends Component {
   }
 
   fetchGetReviews = async () => {
+    if (!this.props.location.state) {
+      return <Redirect to="/" />;
+    }
+
     const { product } = this.props.location.state;
 
-    this.setState({
-      loading: true
-    });
     try {
       const result = await getReviews(product.id);
       this.setState({
@@ -36,12 +37,7 @@ export default class ProductPage extends Component {
       this.setState({
         error: error
       });
-    } finally {
-      this.setState({
-        loading: false
-      });
     }
-    console.log("reviewList", this.state.reviewList);
   };
 
   toggleReviewModal = () => {
@@ -54,17 +50,13 @@ export default class ProductPage extends Component {
     const { product } = this.props.location.state;
 
     try {
-      const result = await getReviews(product.id);
+      const result = await getReviews(product.id, this.props.token);
       this.setState({
         reviewList: result
       });
     } catch (error) {
       this.setState({
         error: error
-      });
-    } finally {
-      this.setState({
-        loading: false
       });
     }
     this.toggleReviewModal();
@@ -115,6 +107,10 @@ export default class ProductPage extends Component {
   };
 
   render() {
+    if (!this.props.location.state) {
+      return <Redirect to="/" />;
+    }
+
     const {
       props: {
         isAuth,
