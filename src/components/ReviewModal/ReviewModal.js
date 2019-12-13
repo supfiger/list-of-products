@@ -79,7 +79,6 @@ export default class ReviewModal extends Component {
       });
       return false;
     }
-
     return true;
   };
 

@@ -11,23 +11,28 @@ export default class RegisterPage extends Component {
     this.state = {
       username: "",
       password: "",
-      error: false
+      error: false,
+      success: false
     };
   }
 
   fetchRegisterUser = async e => {
     e.preventDefault();
-    const { username, password } = this.state;
+    const isValid = this.validate();
 
     try {
-      const result = await registerUser({ username, password });
+      if (isValid) {
+        const { username, password } = this.state;
+        const result = await registerUser({ username, password });
+        console.log("result", result);
 
-      if (result.success) {
-        this.props.onLogin(result.token, username);
-      } else {
-        this.setState({
-          error: result.message
-        });
+        if (result.success) {
+          this.props.onLogin(result.token, username);
+        } else {
+          this.setState({
+            error: result.message
+          });
+        }
       }
     } catch (error) {
       this.setState({
@@ -36,10 +41,29 @@ export default class RegisterPage extends Component {
     }
   };
 
+  validate = () => {
+    const { username, password } = this.state;
+    let error = "";
+
+    if (username === "" && password === "") {
+      error = "Вы не можете оставить поля пустыми";
+    } else if (username === "" || /^\s+$/.test(username)) {
+      error = "Вы должны придумать юзернейм";
+    } else if (password === "") {
+      error = "Вы должны придумать пароль";
+    }
+
+    if (error) {
+      this.setState({
+        error
+      });
+      return false;
+    }
+    return true;
+  };
+
   onChangeUsername = e => {
     let val = e.target.value;
-    val.trim();
-
     this.setState({
       username: val
     });
@@ -47,8 +71,6 @@ export default class RegisterPage extends Component {
 
   onChangePassword = e => {
     let val = e.target.value;
-    val.trim();
-
     this.setState({
       password: val
     });
@@ -56,7 +78,7 @@ export default class RegisterPage extends Component {
 
   render() {
     const {
-      state: { username, password, error }
+      state: { username, password, error, success }
     } = this;
 
     if (this.props.isAuth) {
@@ -100,6 +122,7 @@ export default class RegisterPage extends Component {
               </button>
             </div>
             {error && <div className="errorMessage">{error}</div>}
+            {success}
           </div>
         </form>
       </div>

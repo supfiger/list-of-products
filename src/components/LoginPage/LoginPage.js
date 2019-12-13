@@ -17,17 +17,20 @@ export default class LoginPage extends Component {
 
   fetchLoginUser = async e => {
     e.preventDefault();
-    const { username, password } = this.state;
+    const isValid = this.validate();
 
     try {
-      const result = await loginUser({ username, password });
+      if (isValid) {
+        const { username, password } = this.state;
+        const result = await loginUser({ username, password });
 
-      if (result.success) {
-        this.props.onLogin(result.token, username);
-      } else {
-        this.setState({
-          error: result.message
-        });
+        if (result.success) {
+          this.props.onLogin(result.token, username);
+        } else {
+          this.setState({
+            error: result.message
+          });
+        }
       }
     } catch (error) {
       this.setState({
@@ -36,20 +39,36 @@ export default class LoginPage extends Component {
     }
   };
 
+  validate = () => {
+    const { username, password } = this.state;
+    let error = "";
+
+    if (username === "" && password === "") {
+      error = "Вы не можете оставить поля пустыми";
+    } else if (username === "" || /^\s+$/.test(username)) {
+      error = "Вы должны ввести юзернейм";
+    } else if (password === "") {
+      error = "Вы должны ввести пароль";
+    }
+
+    if (error) {
+      this.setState({
+        error
+      });
+      return false;
+    }
+    return true;
+  };
+
   onChangeUsername = e => {
     let val = e.target.value;
-
-    if (val.match(/^\S+$/)) {
-      this.setState({
-        username: val
-      });
-    }
+    this.setState({
+      username: val
+    });
   };
 
   onChangePassword = e => {
     let val = e.target.value;
-    val.trim();
-
     this.setState({
       password: val
     });
