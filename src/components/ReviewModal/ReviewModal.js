@@ -65,7 +65,7 @@ export default class ReviewModal extends Component {
     let rateError = "";
     let textError = "";
 
-    if (rate == 0) {
+    if (rate === 0) {
       rateError = "Вы должны поставить рейтинг";
     }
     if (!text || /^\s+$/.test(text)) {

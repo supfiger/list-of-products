@@ -11,7 +11,6 @@ export default class ProductPage extends Component {
 
     this.state = {
       reviewList: [],
-      myReviewList: [],
       error: false,
       showReviewModal: false
     };
@@ -31,7 +30,7 @@ export default class ProductPage extends Component {
     try {
       const result = await getReviews(product.id);
       this.setState({
-        reviewList: result
+        reviewList: result.reverse()
       });
     } catch (error) {
       this.setState({
@@ -52,7 +51,7 @@ export default class ProductPage extends Component {
     try {
       const result = await getReviews(product.id, this.props.token);
       this.setState({
-        reviewList: result
+        reviewList: result.reverse()
       });
     } catch (error) {
       this.setState({
@@ -79,9 +78,7 @@ export default class ProductPage extends Component {
         </div>
         <ul className="reviewsGroupList">
           {reviewList.length > 0 ? (
-            reviewList
-              .reverse()
-              .map(item => <Review key={item.id} reviewItem={item} />)
+            reviewList.map(item => <Review key={item.id} reviewItem={item} />)
           ) : (
             <li className="productMessage">There are no reviews here.</li>
           )}
