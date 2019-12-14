@@ -48,7 +48,7 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div className="App">
+        <div>
           <Navbar
             onLogout={this.onLogout}
             isAuth={isAuth}

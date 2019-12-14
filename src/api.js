@@ -73,7 +73,6 @@ export const getReviews = async id => {
       }
     });
     let result = await response.json();
-    console.log("getReviews result", result);
     return result;
   } catch (error) {
     console.error("Ошибка", error);

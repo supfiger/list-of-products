@@ -62,9 +62,12 @@ export default class LoginPage extends Component {
 
   onChangeUsername = e => {
     let val = e.target.value;
-    this.setState({
-      username: val
-    });
+
+    if (!val.match(/\s/)) {
+      this.setState({
+        username: val
+      });
+    }
   };
 
   onChangePassword = e => {

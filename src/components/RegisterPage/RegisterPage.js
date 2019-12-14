@@ -24,7 +24,6 @@ export default class RegisterPage extends Component {
       if (isValid) {
         const { username, password } = this.state;
         const result = await registerUser({ username, password });
-        console.log("result", result);
 
         if (result.success) {
           this.props.onLogin(result.token, username);
@@ -64,9 +63,12 @@ export default class RegisterPage extends Component {
 
   onChangeUsername = e => {
     let val = e.target.value;
-    this.setState({
-      username: val
-    });
+
+    if (!val.match(/\s/)) {
+      this.setState({
+        username: val
+      });
+    }
   };
 
   onChangePassword = e => {
