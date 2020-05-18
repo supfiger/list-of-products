@@ -1,4 +1,4 @@
-const requestURL = "http://smktesting.herokuapp.com";
+const requestURL = "https://smktesting.herokuapp.com";
 
 export const registerUser = async bodyData => {
   try {

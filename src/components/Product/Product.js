@@ -16,7 +16,7 @@ const Product = (props) => {
       >
         <img
           className="card-img-top"
-          src={`http://smktesting.herokuapp.com/static/${productItem.img}`}
+          src={`https://smktesting.herokuapp.com/static/${productItem.img}`}
           alt=""
         />
         <div className="card-body productBody">

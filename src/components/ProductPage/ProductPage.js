@@ -94,7 +94,7 @@ export default class ProductPage extends Component {
       <div className="productTopBlock">
         <img
           className=""
-          src={`http://smktesting.herokuapp.com/static/${product.img}`}
+          src={`https://smktesting.herokuapp.com/static/${product.img}`}
           alt=""
         />
         <h2 className="productTitle">{product.title}</h2>
