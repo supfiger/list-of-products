@@ -12,11 +12,11 @@ export default class RegisterPage extends Component {
       username: "",
       password: "",
       error: false,
-      success: false
+      success: false,
     };
   }
 
-  fetchRegisterUser = async e => {
+  fetchRegisterUser = async (e) => {
     e.preventDefault();
     const isValid = this.validate();
 
@@ -29,13 +29,13 @@ export default class RegisterPage extends Component {
           this.props.onLogin(result.token, username);
         } else {
           this.setState({
-            error: result.message
+            error: result.message,
           });
         }
       }
     } catch (error) {
       this.setState({
-        error: error
+        error: error,
       });
     }
   };
@@ -54,37 +54,37 @@ export default class RegisterPage extends Component {
 
     if (error) {
       this.setState({
-        error
+        error,
       });
       return false;
     }
     return true;
   };
 
-  onChangeUsername = e => {
+  onChangeUsername = (e) => {
     let val = e.target.value;
 
     if (!val.match(/\s/)) {
       this.setState({
-        username: val
+        username: val,
       });
     }
   };
 
-  onChangePassword = e => {
+  onChangePassword = (e) => {
     let val = e.target.value;
     this.setState({
-      password: val
+      password: val,
     });
   };
 
   render() {
     const {
-      state: { username, password, error, success }
+      state: { username, password, error, success },
     } = this;
 
     if (this.props.isAuth) {
-      return <Redirect to="/" />;
+      return <Redirect to="/list-of-products/" />;
     }
 
     return (

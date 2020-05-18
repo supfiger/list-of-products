@@ -8,7 +8,7 @@ import {
   ProductListPage,
   ProductPage,
   RegisterPage,
-  LoginPage
+  LoginPage,
 } from "./components/index";
 
 class App extends Component {
@@ -18,7 +18,7 @@ class App extends Component {
     this.state = {
       isAuth: Boolean(localStorage.getItem("token")),
       username: localStorage.getItem("username"),
-      token: localStorage.getItem("token")
+      token: localStorage.getItem("token"),
     };
   }
 
@@ -26,7 +26,7 @@ class App extends Component {
     this.setState({
       isAuth: true,
       token,
-      username
+      username,
     });
 
     localStorage.setItem("token", token);
@@ -39,7 +39,7 @@ class App extends Component {
 
     this.setState({
       isAuth: false,
-      username: ""
+      username: "",
     });
   };
 
@@ -55,11 +55,15 @@ class App extends Component {
             username={username}
           />
           <Switch>
-            <Route exact path="/productlist" component={ProductListPage} />
             <Route
               exact
-              path="/productlist/:id"
-              render={props => (
+              path="/list-of-products/productlist"
+              component={ProductListPage}
+            />
+            <Route
+              exact
+              path="/list-of-products/productlist/:id"
+              render={(props) => (
                 <ProductPage
                   {...props}
                   isAuth={isAuth}
@@ -70,8 +74,8 @@ class App extends Component {
             />
             <Route
               exact
-              path="/register"
-              render={props => (
+              path="/list-of-products/register"
+              render={(props) => (
                 <RegisterPage
                   {...props}
                   onLogin={this.onLogin}
@@ -81,13 +85,13 @@ class App extends Component {
             />
             <Route
               exact
-              path="/login"
-              render={props => (
+              path="/list-of-products/login"
+              render={(props) => (
                 <LoginPage {...props} onLogin={this.onLogin} isAuth={isAuth} />
               )}
             />
-            {isAuth && <Redirect to="/productlist" />}
-            <Redirect from="/" to="/productlist" />
+            {isAuth && <Redirect to="/list-of-products/productlist" />}
+            <Redirect from="/" to="/list-of-products/productlist" />
           </Switch>
         </div>
       </BrowserRouter>
