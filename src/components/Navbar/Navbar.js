@@ -16,10 +16,7 @@ class Navbar extends Component {
           <div className="row w-100">
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navList navbar-nav d-flex w-100">
-                <Link
-                  className="btn btn-dark navButton mr-auto"
-                  to={`/list-of-products`}
-                >
+                <Link className="btn btn-dark navButton mr-auto" to={`/`}>
                   Домой
                 </Link>
                 {this.props.isAuth ? (
@@ -35,17 +32,14 @@ class Navbar extends Component {
                 ) : (
                   <div className="navAuthWrap ml-auto">
                     <li className="nav-item">
-                      <Link
-                        className="navButton btn btn-primary"
-                        to="/list-of-products/login"
-                      >
+                      <Link className="navButton btn btn-primary" to="/login">
                         Вход
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link
                         className="navButton btn btn-success "
-                        to="/list-of-products/register"
+                        to="/register"
                       >
                         Регистрация
                       </Link>

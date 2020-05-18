@@ -1,17 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Product = (props) => {
+const Product = props => {
   const { productItem } = props;
 
   return (
     <li className="card productItem">
       <Link
         to={{
-          pathname: `/list-of-products/productlist/${productItem.id}`,
+          pathname: `/productlist/${productItem.id}`,
           state: {
-            product: productItem,
-          },
+            product: productItem
+          }
         }}
       >
         <img

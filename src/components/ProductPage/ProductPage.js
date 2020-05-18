@@ -12,7 +12,7 @@ export default class ProductPage extends Component {
     this.state = {
       reviewList: [],
       error: false,
-      showReviewModal: false,
+      showReviewModal: false
     };
   }
 
@@ -22,7 +22,7 @@ export default class ProductPage extends Component {
 
   fetchGetReviews = async () => {
     if (!this.props.location.state) {
-      return <Redirect to="/list-of-products" />;
+      return <Redirect to="/" />;
     }
 
     const { product } = this.props.location.state;
@@ -30,18 +30,18 @@ export default class ProductPage extends Component {
     try {
       const result = await getReviews(product.id);
       this.setState({
-        reviewList: result.reverse(),
+        reviewList: result.reverse()
       });
     } catch (error) {
       this.setState({
-        error: error,
+        error: error
       });
     }
   };
 
   toggleReviewModal = () => {
-    this.setState((prevState) => ({
-      showReviewModal: !prevState.showReviewModal,
+    this.setState(prevState => ({
+      showReviewModal: !prevState.showReviewModal
     }));
   };
 
@@ -51,11 +51,11 @@ export default class ProductPage extends Component {
     try {
       const result = await getReviews(product.id, this.props.token);
       this.setState({
-        reviewList: result.reverse(),
+        reviewList: result.reverse()
       });
     } catch (error) {
       this.setState({
-        error: error,
+        error: error
       });
     }
     this.toggleReviewModal();
@@ -78,7 +78,7 @@ export default class ProductPage extends Component {
         </div>
         <ul className="reviewsGroupList">
           {reviewList.length > 0 ? (
-            reviewList.map((item) => <Review key={item.id} reviewItem={item} />)
+            reviewList.map(item => <Review key={item.id} reviewItem={item} />)
           ) : (
             <li className="productMessage">There are no reviews here.</li>
           )}
@@ -105,7 +105,7 @@ export default class ProductPage extends Component {
 
   render() {
     if (!this.props.location.state) {
-      return <Redirect to="/list-of-products" />;
+      return <Redirect to="/" />;
     }
 
     const {
@@ -113,10 +113,10 @@ export default class ProductPage extends Component {
         isAuth,
         token,
         location: {
-          state: { product },
-        },
+          state: { product }
+        }
       },
-      state: { showReviewModal },
+      state: { showReviewModal }
     } = this;
 
     return (

@@ -11,11 +11,11 @@ export default class LoginPage extends Component {
     this.state = {
       username: "",
       password: "",
-      error: false,
+      error: false
     };
   }
 
-  fetchLoginUser = async (e) => {
+  fetchLoginUser = async e => {
     e.preventDefault();
     const isValid = this.validate();
 
@@ -28,13 +28,13 @@ export default class LoginPage extends Component {
           this.props.onLogin(result.token, username);
         } else {
           this.setState({
-            error: result.message,
+            error: result.message
           });
         }
       }
     } catch (error) {
       this.setState({
-        error: error,
+        error: error
       });
     }
   };
@@ -53,37 +53,37 @@ export default class LoginPage extends Component {
 
     if (error) {
       this.setState({
-        error,
+        error
       });
       return false;
     }
     return true;
   };
 
-  onChangeUsername = (e) => {
+  onChangeUsername = e => {
     let val = e.target.value;
 
     if (!val.match(/\s/)) {
       this.setState({
-        username: val,
+        username: val
       });
     }
   };
 
-  onChangePassword = (e) => {
+  onChangePassword = e => {
     let val = e.target.value;
     this.setState({
-      password: val,
+      password: val
     });
   };
 
   render() {
     const {
-      state: { username, password, error },
+      state: { username, password, error }
     } = this;
 
     if (this.props.isAuth) {
-      return <Redirect to="/list-of-products" />;
+      return <Redirect to="/" />;
     }
 
     return (
