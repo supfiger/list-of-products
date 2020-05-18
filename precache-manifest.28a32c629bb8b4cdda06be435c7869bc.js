@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3a602cd25a5f52aebedd5644547bb767",
+    "revision": "29f5bd7976667601a144f91ed39ed0e4",
     "url": "//supfiger.github.io/list-of-products/index.html"
   },
   {
