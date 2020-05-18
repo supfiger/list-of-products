@@ -15,7 +15,7 @@ export default class ReviewModal extends Component {
       text: "",
       error: false,
       rateError: "",
-      textError: ""
+      textError: "",
     };
   }
 
@@ -35,28 +35,28 @@ export default class ReviewModal extends Component {
           rate: 0,
           text: "",
           rateError: "",
-          textError: ""
+          textError: "",
         });
       }
     } catch (error) {
       this.setState({
-        error: error
+        error: error,
       });
     }
   };
 
-  onChangeRating = rate => {
+  onChangeRating = (rate) => {
     this.setState({
-      rate
+      rate,
     });
   };
 
-  onChangeText = e => {
+  onChangeText = (e) => {
     let val = e.target.value;
     val.trim();
 
     this.setState({
-      text: val
+      text: val,
     });
   };
 
@@ -75,7 +75,7 @@ export default class ReviewModal extends Component {
     if (rateError || textError) {
       this.setState({
         rateError,
-        textError
+        textError,
       });
       return false;
     }
@@ -85,7 +85,7 @@ export default class ReviewModal extends Component {
   render() {
     const {
       props: { show, onClose },
-      state: { rate, text, error, rateError, textError }
+      state: { rate, text, error, rateError, textError },
     } = this;
 
     if (!this.props.isAuth) {
@@ -96,7 +96,10 @@ export default class ReviewModal extends Component {
           className="reviewModalMessage"
         >
           <h4>Войдите, чтобы написать отзыв.</h4>
-          <Link className="btn btn-primary modalButton" to="/login">
+          <Link
+            className="btn btn-primary modalButton"
+            to="/list-of-products/login"
+          >
             Вход
           </Link>
         </ModalComponent>

@@ -8,7 +8,7 @@ import {
   ProductListPage,
   ProductPage,
   RegisterPage,
-  LoginPage
+  LoginPage,
 } from "./components/index";
 
 class App extends Component {
@@ -18,7 +18,7 @@ class App extends Component {
     this.state = {
       isAuth: Boolean(localStorage.getItem("token")),
       username: localStorage.getItem("username"),
-      token: localStorage.getItem("token")
+      token: localStorage.getItem("token"),
     };
   }
 
@@ -26,7 +26,7 @@ class App extends Component {
     this.setState({
       isAuth: true,
       token,
-      username
+      username,
     });
 
     localStorage.setItem("token", token);
@@ -39,7 +39,7 @@ class App extends Component {
 
     this.setState({
       isAuth: false,
-      username: ""
+      username: "",
     });
   };
 
@@ -59,7 +59,7 @@ class App extends Component {
             <Route
               exact
               path="/productlist/:id"
-              render={props => (
+              render={(props) => (
                 <ProductPage
                   {...props}
                   isAuth={isAuth}
@@ -71,7 +71,7 @@ class App extends Component {
             <Route
               exact
               path="/register"
-              render={props => (
+              render={(props) => (
                 <RegisterPage
                   {...props}
                   onLogin={this.onLogin}
@@ -82,12 +82,12 @@ class App extends Component {
             <Route
               exact
               path="/login"
-              render={props => (
+              render={(props) => (
                 <LoginPage {...props} onLogin={this.onLogin} isAuth={isAuth} />
               )}
             />
-            {isAuth && <Redirect to="/productlist" />}
-            <Redirect from="/" to="/productlist" />
+            {isAuth && <Redirect to="/list-of-products/productlist" />}
+            <Redirect from="/" to="/list-of-products/productlist" />
           </Switch>
         </div>
       </BrowserRouter>
