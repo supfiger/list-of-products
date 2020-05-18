@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "//supfiger.github.io/list-of-products/precache-manifest.28a32c629bb8b4cdda06be435c7869bc.js"
+  "//supfiger.github.io/list-of-products/precache-manifest.b11a58c4353584410c163aa6c1de5877.js"
 );
 
 self.addEventListener('message', (event) => {

@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "29f5bd7976667601a144f91ed39ed0e4",
+    "revision": "c6736c575de4d13eccad5a494f7ed157",
     "url": "//supfiger.github.io/list-of-products/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "//supfiger.github.io/list-of-products/static/css/2.17e5ed98.chunk.css"
   },
   {
-    "revision": "05d5ee3dba14bec7b648",
+    "revision": "3fee41d7a4593d762f2a",
     "url": "//supfiger.github.io/list-of-products/static/css/main.47c19b01.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "//supfiger.github.io/list-of-products/static/js/2.a94c7fc8.chunk.js.LICENSE"
   },
   {
-    "revision": "05d5ee3dba14bec7b648",
-    "url": "//supfiger.github.io/list-of-products/static/js/main.41b0cb3e.chunk.js"
+    "revision": "3fee41d7a4593d762f2a",
+    "url": "//supfiger.github.io/list-of-products/static/js/main.23572014.chunk.js"
   },
   {
     "revision": "ac50d2feaf82b113bedc",
