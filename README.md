@@ -1,10 +1,10 @@
-#List of products
+# List of products
 Test task in a company "Light IT"
+
+### Watch demo:
+[List of products](https://supfiger.github.io/list-of-products/)
 
 ### To view the project just run next commands:
   - **`npm install`**
   - **`npm start`**
-  - **`open in browser http://localhost:3000/`**
-  
-### Watch demo:
-[List of products](https://supfiger.github.io/list-of-products/)
+  - **`open in browser [http://localhost:3000/](http://localhost:3000/)`**
