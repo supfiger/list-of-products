@@ -7,5 +7,5 @@ Test task in a company "Light IT"
 ### To view the project just run next commands:
   - **`npm install`**
   - **`npm start`**
-  - **`open in browser`**
+  - `**open in browser**`
 
