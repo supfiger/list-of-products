@@ -2,7 +2,7 @@
 Test task in a company "Light IT"
 
 ### Watch demo:
-[List of products](https://supfiger.github.io/list-of-products/)
+https://supfiger.github.io/list-of-products
 
 ### To run and view the project just run next commands:
   - **`npm install`**
