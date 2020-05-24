@@ -7,5 +7,5 @@ Test task in a company "Light IT"
 ### To run and view the project just run next commands:
   - **`npm install`**
   - **`npm start`**
-And open in browser [localhost:3000](http://localhost:3000/)
+  - And open in browser [localhost:3000](http://localhost:3000/)
 
